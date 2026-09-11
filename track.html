@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>📍 لائیو ٹریکنگ - تھیفٹ ہنٹر</title>
+    <meta name="description" content="تھیفٹ ہنٹر - اپنے موبائلز کی لائیو لوکیشن دیکھیں" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .map-container {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #E8EAF6, #C5CAE9);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #1A237E;
+        }
+        .map-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(26,35,126,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(26,35,126,0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .map-pin {
+            font-size: 4rem;
+            animation: bounce 2s ease-in-out infinite;
+            z-index: 1;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .map-text {
+            margin-top: 20px;
+            color: #1A237E;
+            font-weight: bold;
+            font-size: 1.2rem;
+            z-index: 1;
+        }
+        .live-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #E74C3C;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 2;
+        }
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .track-card {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 16px;
+            border-right: 5px solid #27AE60;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .track-card .icon {
+            font-size: 2.5rem;
+        }
+        .track-card .info {
+            flex: 1;
+            min-width: 200px;
+        }
+        .track-card .info h4 {
+            color: #1A237E;
+            margin-bottom: 4px;
+        }
+        .track-card .info p {
+            color: #6C757D;
+            font-size: 0.9rem;
+            margin: 2px 0;
+        }
+        .track-card .actions {
+            display: flex;
+            gap: 8px;
+        }
+        .btn-live {
+            background: #E74C3C;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== نیویگیشن بار ====== -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🎯</span>
+                <span class="logo-text">تھیفٹ ہنٹر</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">ہوم</a></li>
+                <li><a href="features.html">فیچرز</a></li>
+                <li><a href="devices.html">میرے موبائلز</a></li>
+                <li><a href="track.html" class="active">لائیو ٹریکنگ</a></li>
+                <li><a href="community.html">کمیونٹی</a></li>
+                <li><a href="report.html">رپورٹ</a></li>
+                <li><a href="download.html">ڈاؤن لوڈ</a></li>
+                <li><a href="contact.html">رابطہ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ====== ہیرو ====== -->
+    <section class="hero">
+        <div class="container">
+            <h1>📍 <span>لائیو</span> ٹریکنگ</h1>
+            <p>اپنے تمام موبائلز کی لائیو لوکیشن ایک نقشے پر دیکھیں</p>
+        </div>
+    </section>
+
+    <!-- ====== نقشہ ====== -->
+    <section>
+        <div class="container">
+            <h2>🗺️ لائیو نقشہ</h2>
+            <p>تمام موبائلز کی موجودہ پوزیشن</p>
+
+            <div class="map-container">
+                <div class="live-badge">
+                    <span class="live-dot"></span>
+                    LIVE
+                </div>
+                <div class="map-pin">📍</div>
+                <div class="map-text">5 موبائلز ٹریک ہو رہے ہیں</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== لائیو ٹریکنگ لسٹ ====== -->
+    <section style="background: white;">
+        <div class="container">
+            <h2>📱 تمام موبائلز کی لوکیشن</h2>
+            <p>ہر موبائل کی موجودہ لوکیشن اور حالت</p>
+
+            <!-- ڈیوائس 1 -->
+            <div class="track-card">
+                <div class="icon">📱</div>
+                <div class="info">
+                    <h4>ساجد کا موبائل</h4>
+                    <p>Samsung Galaxy S24</p>
+                    <p>📍 کراچی، پاکستان - 24.8607° N, 67.0011° E</p>
+                    <p>⏰ 2 منٹ پہلے | 🔋 85%</p>
+                </div>
+                <div class="actions">
+                    <a href="#" class="btn-live">📍 لائیو دیکھیں</a>
+                </div>
+            </div>
+
+            <!-- ڈیوائس 2 -->
+            <div class="track-card">
+                <div class="icon">📱</div>
+                <div class="info">
+                    <h4>بیوی کا موبائل</h4>
+                    <p>iPhone 15 Pro</p>
+                    <p>📍 لاہور، پاکستان - 31.5204° N, 74.3587° E</p>
+                    <p>⏰ 5 منٹ پہلے | 🔋 62%</p>
+                </div>
+                <div class="actions">
+                    <a href="#" class="btn-live">📍 لائیو دیکھیں</a>
+                </div>
+            </div>
+
+            <!-- ڈیوائس 3 -->
+            <div class="track-card">
+                <div class="icon">📱</div>
+                <div class="info">
+                    <h4>بیٹے کا موبائل</h4>
+                    <p>OnePlus 12</p>
+                    <p>📍 اسلام آباد - 33.6844° N, 73.0479° E</p>
+                    <p>⏰ 2 گھنٹے پہلے | 🔋 23% | ⚠️ آف لائن</p>
+                </div>
+                <div class="actions">
+                    <a href="#" class="btn-live">📍 آخری لوکیشن</a>
+                </div>
+            </div>
+
+            <!-- ڈیوائس 4 -->
+            <div class="track-card">
+                <div class="icon">📱</div>
+                <div class="info">
+                    <h4>بیٹی کا موبائل</h4>
+                    <p>Google Pixel 8</p>
+                    <p>📍 راولپنڈی - 33.5651° N, 73.0169° E</p>
+                    <p>⏰ 1 منٹ پہلے | 🔋 92%</p>
+                </div>
+                <div class="actions">
+                    <a href="#" class="btn-live">📍 لائیو دیکھیں</a>
+                </div>
+            </div>
+
+            <!-- ڈیوائس 5 -->
+            <div class="track-card">
+                <div class="icon">📱</div>
+                <div class="info">
+                    <h4>گھر کا موبائل</h4>
+                    <p>Xiaomi 14</p>
+                    <p>📍 گھر - 24.8607° N, 67.0011° E</p>
+                    <p>⏰ 3 منٹ پہلے | 🔋 78%</p>
+                </div>
+                <div class="actions">
+                    <a href="#" class="btn-live">📍 لائیو دیکھیں</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====== لوکیشن کیسے کام کرتی ہے ====== -->
+    <section>
+        <div class="container">
+            <h2>⚙️ لوکیشن کیسے کام کرتی ہے؟</h2>
+            <p>تھیفٹ ہنٹر 3 مختلف طریقوں سے لوکیشن حاصل کرتا ہے</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🛰️</div>
+                    <h3>GPS</h3>
+                    <p>سب سے درست لوکیشن، 5-10 میٹر تک</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📶</div>
+                    <h3>WiFi</h3>
+                    <p>قریبی WiFi نیٹ ورکس سے لوکیشن</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📡</div>
+                    <h3>سیل ٹاور</h3>
+                    <p>انٹرنیٹ بند ہونے پر بھی لوکیشن</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== ڈاؤن لوڈ ====== -->
+    <section class="download-section">
+        <div class="container">
+            <h2>📲 ابھی ڈاؤن لوڈ کریں</h2>
+            <p>لائیو ٹریکنگ کے ساتھ اپنے موبائلز کی نگرانی کریں</p>
+            <div class="download-buttons">
+                <a href="#" class="btn btn-download">📱 APK ڈاؤن لوڈ کریں</a>
+                <a href="#" class="btn btn-download btn-google">🏪 پلے اسٹور سے حاصل کریں</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== فوٹر ====== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>🎯 تھیفٹ ہنٹر</h3>
+                    <p>AI پاورڈ اینٹی تھیفٹ ایپ</p>
+                </div>
+                <div>
+                    <h4>📌 لنک</h4>
+                    <ul>
+                        <li><a href="index.html">ہوم</a></li>
+                        <li><a href="features.html">فیچرز</a></li>
+                        <li><a href="devices.html">میرے موبائلز</a></li>
+                        <li><a href="track.html">ٹریکنگ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>⚖️ قانونی</h4>
+                    <ul>
+                        <li><a href="privacy.html">پرائیویسی پالیسی</a></li>
+                        <li><a href="terms.html">شرائط و ضوابط</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>📞 رابطہ</h4>
+                    <p>+92-300-1234567</p>
+                    <p>info@thefthunter.com</p>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2026 تھیفٹ ہنٹر - جملہ حقوق محفوظ ہیں</p>
+        </div>
+    </footer>
+
+</body>
+  </html>
