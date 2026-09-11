@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>👥 کمیونٹی نیٹ ورک - تھیفٹ ہنٹر</title>
+    <meta name="description" content="تھیفٹ ہنٹر - کمیونٹی کی مدد سے چوری شدہ موبائل ڈھونڈیں" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .community-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .stat-box {
+            background: linear-gradient(135deg, #1A237E, #3F51B5);
+            color: white;
+            padding: 24px;
+            border-radius: 16px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(26, 35, 126, 0.3);
+        }
+        .stat-box .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #FFD54F;
+            display: block;
+        }
+        .stat-box .label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+        .sighting-card {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 16px;
+            border-right: 5px solid #F39C12;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .sighting-card .icon {
+            font-size: 2.5rem;
+        }
+        .sighting-card .info {
+            flex: 1;
+            min-width: 200px;
+        }
+        .sighting-card .info h4 {
+            color: #1A237E;
+            margin-bottom: 4px;
+        }
+        .sighting-card .info p {
+            color: #6C757D;
+            font-size: 0.9rem;
+            margin: 2px 0;
+        }
+        .btn-report-sighting {
+            background: linear-gradient(135deg, #F39C12, #E67E22);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-report-sighting:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(243, 156, 18, 0.4);
+        }
+        .help-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
+            border-top: 4px solid #1A237E;
+        }
+        .help-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        .help-card .icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+        .help-card h3 {
+            color: #1A237E;
+            margin-bottom: 12px;
+        }
+        .help-card p {
+            color: #6C757D;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        .btn-help {
+            background: #1A237E;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .btn-help:hover {
+            background: #FFD54F;
+            color: #1A237E;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== نیویگیشن بار ====== -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🎯</span>
+                <span class="logo-text">تھیفٹ ہنٹر</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">ہوم</a></li>
+                <li><a href="features.html">فیچرز</a></li>
+                <li><a href="devices.html">میرے موبائلز</a></li>
+                <li><a href="track.html">لائیو ٹریکنگ</a></li>
+                <li><a href="community.html" class="active">کمیونٹی</a></li>
+                <li><a href="report.html">رپورٹ</a></li>
+                <li><a href="download.html">ڈاؤن لوڈ</a></li>
+                <li><a href="contact.html">رابطہ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ====== ہیرو ====== -->
+    <section class="hero">
+        <div class="container">
+            <h1>👥 <span>کمیونٹی</span> نیٹ ورک</h1>
+            <p>پاکستان بھر کے لوگ مل کر چوری شدہ موبائل ڈھونڈتے ہیں</p>
+        </div>
+    </section>
+
+    <!-- ====== کمیونٹی سٹیٹس ====== -->
+    <section>
+        <div class="container">
+            <h2>📊 کمیونٹی کے اعداد و شمار</h2>
+            <p>ہماری کمیونٹی کے ساتھ چوری کے خلاف لڑیں</p>
+
+            <div class="community-stats">
+                <div class="stat-box">
+                    <span class="number">5,000+</span>
+                    <span class="label">فعال اراکین</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">1,200+</span>
+                    <span class="label">موبائل واپس</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">250+</span>
+                    <span class="label">شہروں میں</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">98%</span>
+                    <span class="label">کامیابی کی شرح</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== حالیہ چوریاں ====== -->
+    <section style="background: white;">
+        <div class="container">
+            <h2>🚨 حالیہ چوریاں - مدد کریں</h2>
+            <p>اگر آپ کو یہ موبائل نظر آئے تو فوراً اطلاع دیں</p>
+
+            <div class="sighting-card">
+                <div class="icon">📱</div>
+                <div class="info">
+                    <h4>Samsung Galaxy S24 Ultra - کالا</h4>
+                    <p>📍 کراچی، صدر بازار</p>
+                    <p>📅 2 دن پہلے | 🔢 IMEI: ****1234</p>
+                    <p>📞 رابطہ: +92-300-1234567</p>
+                </div>
+                <button class="btn-report-sighting">👁️ دیکھا تو رپورٹ کریں</button>
+            </div>
+
+            <div class="sighting-card">
+                <div class="icon">📱</div>
+                <div class="info">
+                    <h4>iPhone 15 Pro - سنہری</h4>
+                    <p>📍 لاہور، انارکلی</p>
+                    <p>📅 5 دن پہلے | 🔢 IMEI: ****5678</p>
+                    <p>📞 رابطہ: +92-301-2345678</p>
+                </div>
+                <button class="btn-report-sighting">👁️ دیکھا تو رپورٹ کریں</button>
+            </div>
+
+            <div class="sighting-card">
+                <div class="icon">📱</div>
+                <div class="info">
+                    <h4>OnePlus 12 - سبز</h4>
+                    <p>📍 اسلام آباد، F-10</p>
+                    <p>📅 1 ہفتہ پہلے | 🔢 IMEI: ****9012</p>
+                    <p>📞 رابطہ: +92-302-3456789</p>
+                </div>
+                <button class="btn-report-sighting">👁️ دیکھا تو رپورٹ کریں</button>
+            </div>
+
+            <div class="sighting-card">
+                <div class="icon">📱</div>
+                <div class="info">
+                    <h4>Google Pixel 8 - سفید</h4>
+                    <p>📍 راولپنڈی، راجہ بازار</p>
+                    <p>📅 3 دن پہلے | 🔢 IMEI: ****3456</p>
+                    <p>📞 رابطہ: +92-303-4567890</p>
+                </div>
+                <button class="btn-report-sighting">👁️ دیکھا تو رپورٹ کریں</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====== کمیونٹی کے ساتھ کیسے مدد کریں ====== -->
+    <section>
+        <div class="container">
+            <h2>🤝 آپ کیسے مدد کر سکتے ہیں؟</h2>
+            <p>تین آسان طریقے - ہر کوئی مدد کر سکتا ہے</p>
+
+            <div class="features-grid">
+
+                <div class="help-card">
+                    <div class="icon">👁️</div>
+                    <h3>مشکوک موبائل دیکھیں</h3>
+                    <p>اگر کوئی موبائل چوری شدہ لگے تو فوراً رپورٹ کریں۔ آپ کی ایک اطلاع کسی کا موبائل واپس لا سکتی ہے۔</p>
+                    <a href="report.html" class="btn-help">رپورٹ کریں</a>
+                </div>
+
+                <div class="help-card">
+                    <div class="icon">📢</div>
+                    <h3>سوشل میڈیا پر شیئر کریں</h3>
+                    <p>چوری شدہ موبائل کی اطلاع اپنے دوستوں اور فیملی کے ساتھ شیئر کریں تاکہ زیادہ لوگ دیکھیں۔</p>
+                    <a href="#" class="btn-help">شیئر کریں</a>
+                </div>
+
+                <div class="help-card">
+                    <div class="icon">🏘️</div>
+                    <h3>اپنے علاقے میں مدد کریں</h3>
+                    <p>اپنے محلے، دفتر یا کالج میں کمیونٹی نیٹ ورک بنائیں۔ مل کر چوری کے خلاف لڑیں۔</p>
+                    <a href="contact.html" class="btn-help">رابطہ کریں</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== کامیابی کی کہانیاں ====== -->
+    <section style="background: linear-gradient(135deg, #F8F9FA, #E8EAF6);">
+        <div class="container">
+            <h2>⭐ کامیابی کی کہانیاں</h2>
+            <p>کمیونٹی کی مدد سے موبائل واپس ملے</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>احمد کا موبائل</h3>
+                    <p>کراچی میں چوری ہوا، کمیونٹی کی مدد سے 2 دن میں واپس ملا۔</p>
+                    <p style="color: #27AE60; font-weight: bold; margin-top: 8px;">✅ واپس مل گیا</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>فاطمہ کا موبائل</h3>
+                    <p>لاہور میں چوری ہوا، ایک صارف نے دیکھا اور رپورٹ کیا۔</p>
+                    <p style="color: #27AE60; font-weight: bold; margin-top: 8px;">✅ واپس مل گیا</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>علی کا موبائل</h3>
+                    <p>اسلام آباد میں چوری ہوا، تھیفٹ ہنٹر کے ذریعے 5 دن میں واپس ملا۔</p>
+                    <p style="color: #27AE60; font-weight: bold; margin-top: 8px;">✅ واپس مل گیا</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== ڈاؤن لوڈ ====== -->
+    <section class="download-section">
+        <div class="container">
+            <h2>📲 کمیونٹی جوائن کریں</h2>
+            <p>تھیفٹ ہنٹر ڈاؤن لوڈ کریں اور کمیونٹی کا حصہ بنیں</p>
+            <div class="download-buttons">
+                <a href="#" class="btn btn-download">📱 APK ڈاؤن لوڈ کریں</a>
+                <a href="#" class="btn btn-download btn-google">🏪 پلے اسٹور سے حاصل کریں</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== فوٹر ====== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>🎯 تھیفٹ ہنٹر</h3>
+                    <p>AI پاورڈ اینٹی تھیفٹ ایپ</p>
+                </div>
+                <div>
+                    <h4>📌 لنک</h4>
+                    <ul>
+                        <li><a href="index.html">ہوم</a></li>
+                        <li><a href="features.html">فیچرز</a></li>
+                        <li><a href="devices.html">میرے موبائلز</a></li>
+                        <li><a href="track.html">ٹریکنگ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>⚖️ قانونی</h4>
+                    <ul>
+                        <li><a href="privacy.html">پرائیویسی پالیسی</a></li>
+                        <li><a href="terms.html">شرائط و ضوابط</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>📞 رابطہ</h4>
+                    <p>+92-300-1234567</p>
+                    <p>info@thefthunter.com</p>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2026 تھیفٹ ہنٹر - جملہ حقوق محفوظ ہیں</p>
+        </div>
+    </footer>
+
+</body>
+  </html>
