@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>🚨 چوری کی رپورٹ - تھیفٹ ہنٹر</title>
+    <meta name="description" content="تھیفٹ ہنٹر - اپنے چوری شدہ موبائل کی رپورٹ کریں" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            color: #1A237E;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #E8EAF6;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: 0.3s;
+            background: #F8F9FA;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1A237E;
+            background: white;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #E74C3C, #C0392B);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
+        }
+        .info-box {
+            background: linear-gradient(135deg, #FFF3CD, #FFE082);
+            border-right: 5px solid #F39C12;
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+        }
+        .info-box h4 {
+            color: #856404;
+            margin-bottom: 8px;
+        }
+        .info-box p {
+            color: #856404;
+            font-size: 0.9rem;
+            margin: 4px 0;
+        }
+        .file-upload {
+            border: 2px dashed #1A237E;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            background: #F8F9FA;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .file-upload:hover {
+            background: #E8EAF6;
+        }
+        .file-upload .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .file-upload p {
+            color: #6C757D;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🎯</span>
+                <span class="logo-text">تھیفٹ ہنٹر</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">ہوم</a></li>
+                <li><a href="features.html">فیچرز</a></li>
+                <li><a href="devices.html">میرے موبائلز</a></li>
+                <li><a href="track.html">لائیو ٹریکنگ</a></li>
+                <li><a href="community.html">کمیونٹی</a></li>
+                <li><a href="report.html" class="active">رپورٹ</a></li>
+                <li><a href="download.html">ڈاؤن لوڈ</a></li>
+                <li><a href="contact.html">رابطہ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>🚨 <span>چوری کی رپورٹ</span></h1>
+            <p>اپنے چوری شدہ موبائل کی اطلاع دیں - ہم اسے ڈھونڈنے میں مدد کریں گے</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="form-container">
+
+                <div class="info-box">
+                    <h4>⚠️ اہم معلومات</h4>
+                    <p>✅ رپورٹ جمع کرنے کے لیے درج ذیل معلومات درکار ہیں</p>
+                    <p>✅ آپ کی معلومات مکمل طور پر محفوظ رہیں گی</p>
+                    <p>✅ رپورٹ جمع کرنے کے بعد آپ کو SMS پر تصدیق ملے گی</p>
+                </div>
+
+                <form>
+
+                    <h3 style="color: #1A237E; margin-bottom: 20px;">📱 موبائل کی معلومات</h3>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>📱 موبائل کا نام *</label>
+                            <input type="text" placeholder="مثلاً: ساجد کا موبائل" required />
+                        </div>
+                        <div class="form-group">
+                            <label>📲 موبائل ماڈل *</label>
+                            <input type="text" placeholder="مثلاً: Samsung Galaxy S24" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🔢 IMEI نمبر * (ڈائل کریں *#06#)</label>
+                        <input type="text" placeholder="123456789012345" maxlength="15" required />
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>🎨 موبائل کا رنگ</label>
+                            <input type="text" placeholder="مثلاً: کالا، سفید" />
+                        </div>
+                        <div class="form-group">
+                            <label>📅 چوری کی تاریخ *</label>
+                            <input type="date" required />
+                        </div>
+                    </div>
+
+                    <h3 style="color: #1A237E; margin: 30px 0 20px;">👤 آپ کی معلومات</h3>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>👤 آپ کا نام *</label>
+                            <input type="text" placeholder="پورا نام" required />
+                        </div>
+                        <div class="form-group">
+                            <label>📞 فون نمبر *</label>
+                            <input type="tel" placeholder="+92-300-1234567" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>✉️ ای میل (اختیاری)</label>
+                        <input type="email" placeholder="example@email.com" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>📍 چوری کی جگہ *</label>
+                        <input type="text" placeholder="مثلاً: کراچی، صدر بازار" required />
+                    </div>
+
+                    <h3 style="color: #1A237E; margin: 30px 0 20px;">📋 اضافی معلومات</h3>
+
+                    <div class="form-group">
+                        <label>📄 FIR نمبر (اگر ہے)</label>
+                        <input type="text" placeholder="FIR#123/2026" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>🏢 تھانے کا نام (اگر FIR ہے)</label>
+                        <input type="text" placeholder="مثلاً: صدر تھانہ، کراچی" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>📝 اضافی تفصیل</label>
+                        <textarea placeholder="چوری کیسے ہوئی، کوئی گواہ، یا دیگر معلومات..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>📸 موبائل کی تصویر (اختیاری)</label>
+                        <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                            <div class="icon">📁</div>
+                            <p>تصویر اپ لوڈ کرنے کے لیے کلک کریں</p>
+                            <p style="font-size: 0.8rem;">JPG, PNG - زیادہ سے زیادہ 5MB</p>
+                        </div>
+                        <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        🚨 رپورٹ جمع کریں
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: white;">
+        <div class="container">
+            <h2>⚙️ رپورٹ کے بعد کیا ہوگا؟</h2>
+            <p>آپ کی رپورٹ جمع کرنے کے بعد یہ عمل ہوگا</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>✅ تصدیق</h3>
+                    <p>آپ کو SMS پر تصدیق ملے گی</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>🔍 تلاش</h3>
+                    <p>ہماری ٹیم موبائل کی تلاش شروع کرے گی</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>📱 الرٹ</h3>
+                    <p>پوری کمیونٹی کو الرٹ بھیجا جائے گا</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>📍 لوکیشن</h3>
+                    <p>ملتے ہی آپ کو لوکیشن بھیجی جائے گی</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>📞 ہنگامی نمبر</h2>
+            <p>فوری مدد کے لیے ان نمبروں پر رابطہ کریں</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚔</div>
+                    <h3>پولیس</h3>
+                    <p style="font-size: 1.5rem; color: #E74C3C; font-weight: bold;">15</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚨</div>
+                    <h3>ریسکیو</h3>
+                    <p style="font-size: 1.5rem; color: #E74C3C; font-weight: bold;">1122</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📞</div>
+                    <h3>ہماری ہیلپ لائن</h3>
+                    <p style="font-size: 1.2rem; color: #27AE60; font-weight: bold;">+92-300-1234567</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="download-section">
+        <div class="container">
+            <h2>📲 ابھی ڈاؤن لوڈ کریں</h2>
+            <p>تھیفٹ ہنٹر کے ساتھ اپنے موبائل کو محفوظ بنائیں</p>
+            <div class="download-buttons">
+                <a href="#" class="btn btn-download">📱 APK ڈاؤن لوڈ کریں</a>
+                <a href="#" class="btn btn-download btn-google">🏪 پلے اسٹور سے حاصل کریں</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>🎯 تھیفٹ ہنٹر</h3>
+                    <p>AI پاورڈ اینٹی تھیفٹ ایپ</p>
+                </div>
+                <div>
+                    <h4>📌 لنک</h4>
+                    <ul>
+                        <li><a href="index.html">ہوم</a></li>
+                        <li><a href="features.html">فیچرز</a></li>
+                        <li><a href="devices.html">میرے موبائلز</a></li>
+                        <li><a href="track.html">ٹریکنگ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>⚖️ قانونی</h4>
+                    <ul>
+                        <li><a href="privacy.html">پرائیویسی پالیسی</a></li>
+                        <li><a href="terms.html">شرائط و ضوابط</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>📞 رابطہ</h4>
+                    <p>+92-300-1234567</p>
+                    <p>info@thefthunter.com</p>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2026 تھیفٹ ہنٹر - جملہ حقوق محفوظ ہیں</p>
+        </div>
+    </footer>
+
+</body>
+                              </html>
