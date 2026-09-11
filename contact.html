@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>📞 رابطہ - تھیفٹ ہنٹر</title>
+    <meta name="description" content="تھیفٹ ہنٹر - ہم سے رابطہ کریں" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        .contact-info {
+            background: linear-gradient(135deg, #1A237E, #3F51B5);
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+        }
+        .contact-info h3 {
+            color: #FFD54F;
+            margin-bottom: 24px;
+            font-size: 1.5rem;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+        .contact-item .icon {
+            font-size: 1.8rem;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .contact-item .details h4 {
+            color: #FFD54F;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+        .contact-item .details p {
+            font-size: 1rem;
+            margin: 0;
+        }
+        .social-links-contact {
+            margin-top: 30px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.4rem;
+            transition: 0.3s;
+        }
+        .social-btn:hover {
+            transform: translateY(-5px);
+        }
+        .social-btn.whatsapp { background: #25D366; }
+        .social-btn.facebook { background: #1877F2; }
+        .social-btn.twitter { background: #1DA1F2; }
+        .social-btn.instagram { background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF); }
+        .social-btn.youtube { background: #FF0000; }
+        .social-btn.email { background: #EA4335; }
+
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .contact-form h3 {
+            color: #1A237E;
+            margin-bottom: 24px;
+            font-size: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            color: #1A237E;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #E8EAF6;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: 0.3s;
+            background: #F8F9FA;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1A237E;
+            background: white;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .btn-send {
+            width: 100%;
+            background: linear-gradient(135deg, #1A237E, #3F51B5);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-send:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(26, 35, 126, 0.4);
+        }
+
+        .faq-section {
+            margin-top: 60px;
+        }
+        .faq-item {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-right: 5px solid #1A237E;
+        }
+        .faq-item h4 {
+            color: #1A237E;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        .faq-item p {
+            color: #6C757D;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== نیویگیشن بار ====== -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🎯</span>
+                <span class="logo-text">تھیفٹ ہنٹر</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">ہوم</a></li>
+                <li><a href="features.html">فیچرز</a></li>
+                <li><a href="devices.html">میرے موبائلز</a></li>
+                <li><a href="track.html">لائیو ٹریکنگ</a></li>
+                <li><a href="community.html">کمیونٹی</a></li>
+                <li><a href="report.html">رپورٹ</a></li>
+                <li><a href="download.html">ڈاؤن لوڈ</a></li>
+                <li><a href="contact.html" class="active">رابطہ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ====== ہیرو ====== -->
+    <section class="hero">
+        <div class="container">
+            <h1>📞 <span>رابطہ</span> کریں</h1>
+            <p>ہم سے رابطہ کریں - 24/7 آپ کی خدمت میں</p>
+        </div>
+    </section>
+
+    <!-- ====== رابطہ ====== -->
+    <section>
+        <div class="container">
+            <h2>📬 ہم سے رابطہ کریں</h2>
+            <p>کسی بھی سوال، مشورے یا مدد کے لیے ہم سے رابطہ کریں</p>
+
+            <div class="contact-grid">
+
+                <!-- معلومات -->
+                <div class="contact-info">
+                    <h3>📞 رابطے کی معلومات</h3>
+
+                    <div class="contact-item">
+                        <div class="icon">📞</div>
+                        <div class="details">
+                            <h4>فون / واٹس ایپ</h4>
+                            <p>+92-300-1234567</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="icon">✉️</div>
+                        <div class="details">
+                            <h4>ای میل</h4>
+                            <p>info@thefthunter.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="icon">📍</div>
+                        <div class="details">
+                            <h4>دفتر</h4>
+                            <p>کراچی، پاکستان</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="icon">⏰</div>
+                        <div class="details">
+                            <h4>اوقات کار</h4>
+                            <p>24/7 - ہر وقت دستیاب</p>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 30px;">🌐 سوشل میڈیا</h3>
+                    <div class="social-links-contact">
+                        <a href="https://wa.me/923001234567" class="social-btn whatsapp" target="_blank">💬</a>
+                        <a href="#" class="social-btn facebook">📘</a>
+                        <a href="#" class="social-btn twitter">🐦</a>
+                        <a href="#" class="social-btn instagram">📷</a>
+                        <a href="#" class="social-btn youtube">▶️</a>
+                        <a href="mailto:info@thefthunter.com" class="social-btn email">✉️</a>
+                    </div>
+                </div>
+
+                <!-- فارم -->
+                <div class="contact-form">
+                    <h3>📝 پیغام بھیجیں</h3>
+
+                    <form>
+                        <div class="form-group">
+                            <label>👤 آپ کا نام *</label>
+                            <input type="text" placeholder="پورا نام" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label>📞 فون نمبر *</label>
+                            <input type="tel" placeholder="+92-300-1234567" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label>✉️ ای میل</label>
+                            <input type="email" placeholder="example@email.com" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>📋 موضوع *</label>
+                            <select required>
+                                <option value="">موضوع منتخب کریں</option>
+                                <option value="help">مدد چاہیے</option>
+                                <option value="report">چوری کی رپورٹ</option>
+                                <option value="bug">بگ رپورٹ</option>
+                                <option value="suggestion">مشورہ</option>
+                                <option value="other">دیگر</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>📝 آپ کا پیغام *</label>
+                            <textarea placeholder="اپنا پیغام یہاں لکھیں..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-send">
+                            📨 پیغام بھیجیں
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== فوری رابطہ ====== -->
+    <section style="background: white;">
+        <div class="container">
+            <h2>⚡ فوری رابطہ</h2>
+            <p>ہنگامی صورتحال میں ان نمبروں پر فوراً رابطہ کریں</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚔</div>
+                    <h3>پولیس</h3>
+                    <p style="font-size: 1.5rem; color: #E74C3C; font-weight: bold;">15</p>
+                    <p>پاکستان پولیس ہیلپ لائن</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚨</div>
+                    <h3>ریسکیو</h3>
+                    <p style="font-size: 1.5rem; color: #E74C3C; font-weight: bold;">1122</p>
+                    <p>ریسکیو 1122 ہیلپ لائن</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>واٹس ایپ</h3>
+                    <p style="font-size: 1rem; color: #25D366; font-weight: bold;">+92-300-1234567</p>
+                    <p>ہماری ہیلپ لائن</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== عام سوالات ====== -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>❓ عام سوالات</h2>
+            <p>اکثر پوچھے جانے والے سوالات کے جوابات</p>
+
+            <div class="faq-item">
+                <h4>❓ ایپ کیسے استعمال کریں؟</h4>
+                <p>ایپ ڈاؤن لوڈ کریں، اپنے موبائلز رجسٹر کریں، اور AI کو اپنا رویہ سیکھنے دیں۔ باقی سب خود بخود ہو جائے گا۔</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>❓ کیا میرا ڈیٹا محفوظ ہے؟</h4>
+                <p>جی ہاں! تمام ڈیٹا آپ کے موبائل پر ہی محفوظ رہتا ہے۔ ہم کسی بھی ڈیٹا کو کہیں نہیں بھیجتے۔</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>❓ ایپ کتنی بیٹری استعمال کرتی ہے؟</h4>
+                <p>ہماری ایپ کم بیٹری استعمال کرتی ہے (تقریباً 2-3% روزانہ)۔ ہم نے اسے مکمل طور پر آپٹیمائز کیا ہے۔</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>❓ کیا ایپ مفت ہے؟</h4>
+                <p>جی ہاں! بنیادی فیچرز بالکل مفت ہیں۔ مزید خصوصیات کے لیے پریمیم پلان بھی دستیاب ہے۔</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>❓ چوری شدہ موبائل کیسے ڈھونڈیں؟</h4>
+                <p>جب آپ کا موبائل چوری ہو، ایپ میں "رپورٹ" کریں۔ ہماری کمیونٹی اور AI مل کر اسے ڈھونڈیں گے۔</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>❓ کیا انٹرنیٹ کے بغیر کام کرتی ہے؟</h4>
+                <p>جی ہاں! AI اور لوکیشن آف لائن بھی کام کرتی ہے۔ جب انٹرنیٹ آئے گا تو تمام ڈیٹا خود بخود بھیج دیا جائے گا۔</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====== ڈاؤن لوڈ ====== -->
+    <section class="download-section">
+        <div class="container">
+            <h2>📲 ایپ ڈاؤن لوڈ کریں</h2>
+            <p>آج ہی تھیفٹ ہنٹر ڈاؤن لوڈ کریں اور محفوظ رہیں</p>
+            <div class="download-buttons">
+                <a href="download.html" class="btn btn-download">📱 APK ڈاؤن لوڈ کریں</a>
+                <a href="download.html" class="btn btn-download btn-google">🏪 پلے اسٹور سے حاصل کریں</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== فوٹر ====== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>🎯 تھیفٹ ہنٹر</h3>
+                    <p>AI پاورڈ اینٹی تھیفٹ ایپ</p>
+                </div>
+                <div>
+                    <h4>📌 لنک</h4>
+                    <ul>
+                        <li><a href="index.html">ہوم</a></li>
+                        <li><a href="features.html">فیچرز</a></li>
+                        <li><a href="devices.html">میرے موبائلز</a></li>
+                        <li><a href="track.html">ٹریکنگ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>⚖️ قانونی</h4>
+                    <ul>
+                        <li><a href="privacy.html">پرائیویسی پالیسی</a></li>
+                        <li><a href="terms.html">شرائط و ضوابط</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>📞 رابطہ</h4>
+                    <p>+92-300-1234567</p>
+                    <p>info@thefthunter.com</p>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2026 تھیفٹ ہنٹر - جملہ حقوق محفوظ ہیں</p>
+        </div>
+    </footer>
+
+</body>
+                      </html>
