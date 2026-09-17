@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://maliksajidh08-blip.github.io/thief-hunter-website/sitemap.xml
