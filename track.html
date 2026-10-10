@@ -4,20 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>📍 لائیو ٹریکنگ - تھیفٹ ہنٹر</title>
-    <meta name="description" content="تھیفٹ ہنٹر - اپنے موبائل کی حقیقی لوکیشن Google Maps پر دیکھیں" />
+    <meta name="description" content="تھیفٹ ہنٹر - اپنے موبائل کی حقیقی لوکیشن نقشے پر دیکھیں" />
     <link rel="stylesheet" href="css/style.css" />
     
-    <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    <!-- Leaflet (OpenStreetMap) - مفت -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <style>
-        .map-container {
+        #map {
             width: 100%;
             height: 500px;
             border-radius: 16px;
-            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
             margin: 20px 0;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            z-index: 1;
         }
         .tracking-info {
             background: white;
@@ -25,6 +26,7 @@
             border-radius: 16px;
             margin-bottom: 20px;
             border-right: 5px solid #27AE60;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
         .info-grid {
             display: grid;
@@ -97,7 +99,7 @@
             font-size: 0.95rem;
         }
         @media (max-width: 768px) {
-            .map-container {
+            #map {
                 height: 350px;
             }
         }
@@ -132,7 +134,7 @@
     <section class="hero">
         <div class="container">
             <h1>📍 <span>حقیقی</span> لائیو ٹریکنگ</h1>
-            <p>اپنے چوری شدہ موبائل کی اصل لوکیشن Google Maps پر دیکھیں</p>
+            <p>اپنے چوری شدہ موبائل کی اصل لوکیشن نقشے پر دیکھیں</p>
         </div>
     </section>
 
@@ -140,15 +142,15 @@
     <section>
         <div class="container">
             <h2>🗺️ حقیقی ٹائم لوکیشن</h2>
-            <p>یہ نقشہ آپ کے موبائل کی اصل لوکیشن دکھاتا ہے - جیسا کہ Google Maps پر نظر آتی ہے</p>
+            <p>یہ نقشہ آپ کے موبائل کی اصل لوکیشن دکھاتا ہے</p>
 
             <!-- Demo Notice -->
             <div class="demo-notice">
                 <p>ℹ️ <strong>نوٹ:</strong> یہ ایک ڈیمو نقشہ ہے۔ حقیقی لوکیشن کے لیے ایپ ڈاؤن لوڈ کریں اور اپنے موبائل کو رجسٹر کریں۔</p>
             </div>
 
-            <!-- حقیقی Google Map -->
-            <div id="map" class="map-container"></div>
+            <!-- حقیقی نقشہ -->
+            <div id="map"></div>
 
             <!-- ٹریکنگ کی معلومات -->
             <div class="tracking-info">
@@ -156,7 +158,7 @@
                 <div class="info-grid">
                     <div class="info-item">
                         <strong>📍 موجودہ لوکیشن</strong>
-                        <span id="current-location">ڈیمو: کراچی</span>
+                        <span id="current-location">کراچی، پاکستان</span>
                     </div>
                     <div class="info-item">
                         <strong>⏰ آخری اپڈیٹ</strong>
@@ -193,7 +195,7 @@
 
                 <div class="faq-item">
                     <h3>1. کیا یہ ٹریکنگ حقیقی ہے؟</h3>
-                    <p>جی ہاں! جب آپ ایپ ڈاؤن لوڈ کر کے اپنے موبائل کو رجسٹر کریں گے، تو یہ Google Maps کے ذریعے آپ کے موبائل کی <strong>حقیقی لوکیشن</strong> دکھائے گی۔ جیسا کہ آپ کوئی چیز Google Maps پر ڈھونڈتے ہیں، بالکل ویسے ہی۔</p>
+                    <p>جی ہاں! جب آپ ایپ ڈاؤن لوڈ کر کے اپنے موبائل کو رجسٹر کریں گے، تو یہ نقشے کے ذریعے آپ کے موبائل کی <strong>حقیقی لوکیشن</strong> دکھائے گی۔ بالکل ویسے ہی جیسا کہ آپ کسی دوست کی لوکیشن WhatsApp پر بھیجتے ہیں۔</p>
                 </div>
 
                 <div class="faq-item">
@@ -255,7 +257,7 @@
                 <div class="step">
                     <div class="step-number">3</div>
                     <h3>📍 لوکیشن دیکھیں</h3>
-                    <p>حقیقی وقت میں موبائل کی لوکیشن Google Maps پر دیکھیں</p>
+                    <p>حقیقی وقت میں موبائل کی لوکیشن نقشے پر دیکھیں</p>
                 </div>
             </div>
         </div>
@@ -309,78 +311,60 @@
         </div>
     </footer>
 
-    <!-- ====== Google Maps Script ====== -->
+    <!-- ====== Leaflet Map Script ====== -->
     <script>
-        function initMap() {
-            // Default location (Karachi)
-            const defaultLocation = { lat: 24.8607, lng: 67.0011 };
-            
-            // Create map
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 13,
-                center: defaultLocation,
-                mapTypeControl: true,
-                streetViewControl: true,
-                fullscreenControl: true,
-                styles: [
-                    {
-                        featureType: "all",
-                        elementType: "geometry",
-                        stylers: [{ color: "#e8eaf6" }]
-                    },
-                    {
-                        featureType: "water",
-                        elementType: "geometry",
-                        stylers: [{ color: "#1A237E" }]
-                    },
-                    {
-                        featureType: "road",
-                        elementType: "geometry",
-                        stylers: [{ color: "#ffffff" }]
-                    }
-                ]
-            });
-            
-            // Add marker
-            const marker = new google.maps.Marker({
-                position: defaultLocation,
-                map: map,
-                title: "آپ کا موبائل یہاں ہے",
-                animation: google.maps.Animation.DROP,
-                icon: {
-                    url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(
-                        '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#E74C3C"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>'
-                    ),
-                    scaledSize: new google.maps.Size(40, 40)
-                }
-            });
-            
-            // Add info window
-            const infoWindow = new google.maps.InfoWindow({
-                content: '<div style="font-family: sans-serif; padding: 8px;"><strong style="color: #1A237E;">🎯 تھیفٹ ہنٹر</strong><br><span style="color: #27AE60;">🟢 آن لائن</span><br><small>آخری اپڈیٹ: ابھی</small></div>'
-            });
-            
-            marker.addListener("click", () => {
-                infoWindow.open(map, marker);
-            });
-            
-            // Auto-open info window
-            infoWindow.open(map, marker);
-        }
-        
-        // Update time
+        // نقشہ بنائیں (کراچی)
+        var map = L.map('map').setView([24.8607, 67.0011], 13);
+
+        // OpenStreetMap tiles (مفت)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 19
+        }).addTo(map);
+
+        // Custom Marker
+        var redIcon = L.divIcon({
+            html: '<div style="background: #E74C3C; width: 40px; height: 40px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 3px 10px rgba(0,0,0,0.3);"><div style="transform: rotate(45deg); font-size: 20px; text-align: center; line-height: 34px;">📱</div></div>',
+            className: 'custom-marker',
+            iconSize: [40, 40],
+            iconAnchor: [20, 40],
+            popupAnchor: [0, -40]
+        });
+
+        // Marker لگائیں
+        var marker = L.marker([24.8607, 67.0011], { icon: redIcon }).addTo(map);
+
+        // Popup
+        marker.bindPopup(`
+            <div style="font-family: sans-serif; text-align: center; padding: 8px;">
+                <strong style="color: #1A237E; font-size: 16px;">🎯 تھیفٹ ہنٹر</strong><br>
+                <span style="color: #27AE60; font-weight: bold;">🟢 آن لائن</span><br>
+                <span style="color: #6C757D; font-size: 12px;">آخری اپڈیٹ: ابھی</span><br>
+                <span style="color: #6C757D; font-size: 12px;">کراچی، پاکستان</span>
+            </div>
+        `).openPopup();
+
+        // دائرہ (Accuracy)
+        L.circle([24.8607, 67.0011], {
+            color: '#27AE60',
+            fillColor: '#27AE60',
+            fillOpacity: 0.1,
+            radius: 200
+        }).addTo(map);
+
+        // وقت اپڈیٹ کریں
         function updateTime() {
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString('ur-PK');
-            const lastUpdateEl = document.getElementById('last-update');
+            var now = new Date();
+            var timeStr = now.toLocaleTimeString('ur-PK');
+            var lastUpdateEl = document.getElementById('last-update');
             if (lastUpdateEl) {
                 lastUpdateEl.textContent = timeStr;
             }
         }
-        
+
         setInterval(updateTime, 1000);
         updateTime();
     </script>
 
 </body>
-                                                        </html>
+                        </html>
