@@ -4,15 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>🚨 چوری کی رپورٹ - تھیفٹ ہنٹر</title>
-    <meta name="description" content="تھیفٹ ہنٹر - اپنے چوری شدہ موبائل کی رپورٹ کریں" />
+    <meta name="description" content="تھیفٹ ہنٹر - اپنے چوری شدہ موبائل کی رپورٹ کریں اور FIR کی تصویر اپ لوڈ کریں" />
     <link rel="stylesheet" href="css/style.css" />
+    
     <style>
         .form-container {
             background: white;
             padding: 30px;
             border-radius: 16px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
         }
         .form-group {
@@ -38,15 +39,10 @@
             background: #F8F9FA;
         }
         .form-group input:focus,
-        .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: #1A237E;
             background: white;
-        }
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
         }
         .form-row {
             display: grid;
@@ -86,41 +82,192 @@
             font-size: 0.9rem;
             margin: 4px 0;
         }
-        .file-upload {
-            border: 2px dashed #1A237E;
-            padding: 30px;
-            text-align: center;
-            border-radius: 10px;
+        .camera-section {
             background: #F8F9FA;
+            border: 2px dashed #1A237E;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .camera-section h4 {
+            color: #1A237E;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        .camera-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+        .btn-camera {
+            background: #1A237E;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
             cursor: pointer;
             transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        .file-upload:hover {
-            background: #E8EAF6;
+        .btn-camera:hover {
+            background: #3F51B5;
+            transform: translateY(-2px);
         }
-        .file-upload .icon {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+        .btn-gallery {
+            background: #27AE60;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        .file-upload p {
-            color: #6C757D;
+        .btn-gallery:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+        .preview-container {
+            display: none;
+            margin-top: 20px;
+            position: relative;
+        }
+        .preview-container img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .preview-container .remove-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #E74C3C;
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        .privacy-notice {
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+            border-right: 5px solid #27AE60;
+            padding: 16px;
+            border-radius: 10px;
+            margin: 16px 0;
+        }
+        .privacy-notice h4 {
+            color: #1B5E20;
+            margin-bottom: 8px;
+        }
+        .privacy-notice p {
+            color: #1B5E20;
             font-size: 0.9rem;
+            margin: 4px 0;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 16px 0;
+            padding: 12px;
+            background: #F8F9FA;
+            border-radius: 10px;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+        .checkbox-group label {
+            color: #495057;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+        .status-message {
+            display: none;
+            padding: 16px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .status-success {
+            background: #D4EDDA;
+            color: #155724;
+            border-right: 5px solid #27AE60;
+        }
+        .faq-section {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+        .faq-item {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-right: 4px solid #1A237E;
+        }
+        .faq-item h3 {
+            color: #1A237E;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .faq-item p {
+            color: #495057;
+            line-height: 1.9;
+            font-size: 0.95rem;
+        }
+        .legal-notice {
+            background: linear-gradient(135deg, #FFF3CD, #FFE082);
+            border-right: 5px solid #F39C12;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        .legal-notice strong {
+            color: #856404;
+        }
+        .legal-notice p {
+            color: #856404;
+            margin: 8px 0;
+            font-size: 0.95rem;
         }
         @media (max-width: 600px) {
             .form-row {
                 grid-template-columns: 1fr;
+            }
+            .camera-buttons {
+                flex-direction: column;
+            }
+            .btn-camera, .btn-gallery {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- ====== نیویگیشن بار ====== -->
     <nav class="navbar">
         <div class="container">
-            <a href="index.html" class="logo">
+            <div class="logo">
                 <span class="logo-icon">🎯</span>
                 <span class="logo-text">تھیفٹ ہنٹر</span>
-            </a>
+            </div>
             <ul class="nav-menu">
                 <li><a href="index.html">ہوم</a></li>
                 <li><a href="features.html">فیچرز</a></li>
@@ -134,115 +281,131 @@
         </div>
     </nav>
 
+    <!-- ====== Main ====== -->
+    <main>
+
+    <!-- ====== ہیرو ====== -->
     <section class="hero">
         <div class="container">
             <h1>🚨 <span>چوری کی رپورٹ</span></h1>
-            <p>اپنے چوری شدہ موبائل کی اطلاع دیں - ہم اسے ڈھونڈنے میں مدد کریں گے</p>
+            <p>اپنے چوری شدہ موبائل کی اطلاع دیں - FIR کی تصویر اپ لوڈ کریں</p>
         </div>
     </section>
 
+    <!-- ====== رپورٹ فارم ====== -->
     <section>
         <div class="container">
             <div class="form-container">
 
+                <!-- انفو باکس -->
                 <div class="info-box">
                     <h4>⚠️ اہم معلومات</h4>
-                    <p>✅ رپورٹ جمع کرنے کے لیے درج ذیل معلومات درکار ہیں</p>
-                    <p>✅ آپ کی معلومات مکمل طور پر محفوظ رہیں گی</p>
-                    <p>✅ رپورٹ جمع کرنے کے بعد آپ کو SMS پر تصدیق ملے گی</p>
+                    <p>✅ FIR کی تصویر لازمی ہے - بغیر FIR رپورٹ نہیں ہوگی</p>
+                    <p>✅ آپ کی ذاتی معلومات (CNIC، نمبر) محفوظ رہیں گی</p>
+                    <p>✅ رپورٹ جمع کرنے کے بعد لوکیشن ٹریکنگ شروع ہوگی</p>
                 </div>
 
-                <form>
+                <!-- فارم -->
+                <form id="reportForm" onsubmit="submitReport(event)">
 
                     <h3 style="color: #1A237E; margin-bottom: 20px;">📱 موبائل کی معلومات</h3>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label>📱 موبائل کا نام *</label>
-                            <input type="text" placeholder="مثلاً: ساجد کا موبائل" required />
+                            <input type="text" id="deviceName" placeholder="مثلاً: ساجد کا موبائل" required />
                         </div>
                         <div class="form-group">
                             <label>📲 موبائل ماڈل *</label>
-                            <input type="text" placeholder="مثلاً: Samsung Galaxy S24" required />
+                            <input type="text" id="deviceModel" placeholder="مثلاً: Samsung Galaxy S24" required />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>🔢 IMEI نمبر * (ڈائل کریں *#06#)</label>
-                        <input type="text" placeholder="123456789012345" maxlength="15" required />
+                        <input type="text" id="imei" placeholder="123456789012345" maxlength="15" pattern="[0-9]{15}" required />
+                        <small style="color: #6C757D; font-size: 0.85rem;">15 ہندسے لازمی ہیں</small>
                     </div>
+
+                    <h3 style="color: #1A237E; margin: 30px 0 20px;">📸 FIR کی تصویر *</h3>
+
+                    <!-- Camera Section -->
+                    <div class="camera-section">
+                        <h4>📄 FIR کی تصویر لیں</h4>
+                        <p style="color: #6C757D; font-size: 0.9rem;">اپنی FIR کی صاف تصویر لیں یا گیلری سے منتخب کریں</p>
+                        
+                        <div class="camera-buttons">
+                            <button type="button" class="btn-camera" onclick="openCamera()">
+                                📷 کیمرے سے لیں
+                            </button>
+                            <button type="button" class="btn-gallery" onclick="openGallery()">
+                                🖼️ گیلری سے منتخب کریں
+                            </button>
+                        </div>
+
+                        <!-- Hidden inputs -->
+                        <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display: none;" onchange="handleFile(this)" />
+                        <input type="file" id="galleryInput" accept="image/*" style="display: none;" onchange="handleFile(this)" />
+
+                        <!-- Preview -->
+                        <div class="preview-container" id="previewContainer">
+                            <img id="previewImage" src="" alt="FIR Preview" />
+                            <button type="button" class="remove-btn" onclick="removeImage()">×</button>
+                        </div>
+                    </div>
+
+                    <!-- Privacy Notice -->
+                    <div class="privacy-notice">
+                        <h4>🔒 پرائیویسی نوٹس</h4>
+                        <p>✅ FIR میں موجود CNIC/ID کارڈ کا نمبر خود بخود چھپا دیا جائے گا</p>
+                        <p>✅ صرف موبائل کا IMEI اور چوری کی تفصیل محفوظ ہوگی</p>
+                        <p>✅ آپ کی ذاتی معلومات محفوظ رہیں گی</p>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="privacyAgree" required />
+                        <label for="privacyAgree">
+                            میں تصدیق کرتا/کرتی ہوں کہ یہ موبائل میرا ہے اور FIR کی تصویر درست ہے۔
+                            میں پرائیویسی پالیسی سے متفق ہوں۔
+                        </label>
+                    </div>
+
+                    <h3 style="color: #1A237E; margin: 30px 0 20px;">👤 آپ کی معلومات (اختیاری)</h3>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label>🎨 موبائل کا رنگ</label>
-                            <input type="text" placeholder="مثلاً: کالا، سفید" />
+                            <label>👤 آپ کا نام</label>
+                            <input type="text" id="ownerName" placeholder="پورا نام" />
                         </div>
                         <div class="form-group">
-                            <label>📅 چوری کی تاریخ *</label>
-                            <input type="date" required />
-                        </div>
-                    </div>
-
-                    <h3 style="color: #1A237E; margin: 30px 0 20px;">👤 آپ کی معلومات</h3>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>👤 آپ کا نام *</label>
-                            <input type="text" placeholder="پورا نام" required />
-                        </div>
-                        <div class="form-group">
-                            <label>📞 فون نمبر *</label>
-                            <input type="tel" placeholder="+92-300-1234567" required />
+                            <label>📞 فون نمبر</label>
+                            <input type="tel" id="ownerPhone" placeholder="+92-300-1234567" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>✉️ ای میل (اختیاری)</label>
-                        <input type="email" placeholder="example@email.com" />
+                        <label>📍 چوری کی جگہ</label>
+                        <input type="text" id="theftLocation" placeholder="مثلاً: کراچی، صدر بازار" />
                     </div>
 
                     <div class="form-group">
-                        <label>📍 چوری کی جگہ *</label>
-                        <input type="text" placeholder="مثلاً: کراچی، صدر بازار" required />
-                    </div>
-
-                    <h3 style="color: #1A237E; margin: 30px 0 20px;">📋 اضافی معلومات</h3>
-
-                    <div class="form-group">
-                        <label>📄 FIR نمبر (اگر ہے)</label>
-                        <input type="text" placeholder="FIR#123/2026" />
-                    </div>
-
-                    <div class="form-group">
-                        <label>🏢 تھانے کا نام (اگر FIR ہے)</label>
-                        <input type="text" placeholder="مثلاً: صدر تھانہ، کراچی" />
-                    </div>
-
-                    <div class="form-group">
-                        <label>📝 اضافی تفصیل</label>
-                        <textarea placeholder="چوری کیسے ہوئی، کوئی گواہ، یا دیگر معلومات..."></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>📸 موبائل کی تصویر (اختیاری)</label>
-                        <div class="file-upload" onclick="document.getElementById('fileInput').click()">
-                            <div class="icon">📁</div>
-                            <p>تصویر اپ لوڈ کرنے کے لیے کلک کریں</p>
-                            <p style="font-size: 0.8rem;">JPG, PNG - زیادہ سے زیادہ 5MB</p>
-                        </div>
-                        <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+                        <label>📅 چوری کی تاریخ</label>
+                        <input type="date" id="theftDate" />
                     </div>
 
                     <button type="submit" class="btn-submit">
-                        🚨 رپورٹ جمع کریں
+                        🚨 رپورٹ جمع کریں اور ٹریکنگ شروع کریں
                     </button>
 
+                    <!-- Status Message -->
+                    <div class="status-message" id="statusMessage"></div>
                 </form>
             </div>
         </div>
     </section>
 
-    <section style="background: white;">
+    <!-- ====== رپورٹ کے بعد کیا ہوگا ====== -->
+    <section style="background: #F8F9FA;">
         <div class="container">
             <h2>⚙️ رپورٹ کے بعد کیا ہوگا؟</h2>
             <p>آپ کی رپورٹ جمع کرنے کے بعد یہ عمل ہوگا</p>
@@ -251,7 +414,7 @@
                 <div class="step">
                     <div class="step-number">1</div>
                     <h3>✅ تصدیق</h3>
-                    <p>آپ کو SMS پر تصدیق ملے گی</p>
+                    <p>آپ کی FIR کی تصویر چیک ہوگی</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
@@ -272,7 +435,60 @@
         </div>
     </section>
 
+    <!-- ====== FAQ ====== -->
     <section>
+        <div class="container">
+            <h2>❓ عام سوالات</h2>
+            <p>چوری کی رپورٹ کے بارے میں اکثر پوچھے جانے والے سوالات</p>
+
+            <div class="faq-section">
+
+                <div class="faq-item">
+                    <h3>1. کیا FIR کی تصویر لازمی ہے؟</h3>
+                    <p>جی ہاں! پاکستان کے قانون کے مطابق، چوری شدہ موبائل کی رپورٹ کے لیے FIR لازمی ہے۔ FIR کے بغیر نہ پولیس کارروائی کر سکتی ہے، اور نہ ہماری کمیونٹی مدد کر سکتی ہے۔ FIR کی صاف تصویر لینا ضروری ہے۔</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>2. کیا میری CNIC نمبر محفوظ رہے گا؟</h3>
+                    <p>جی ہاں! آپ کی FIR میں موجود CNIC/ID کارڈ نمبر ہم <strong>خود بخود چھپا دیں گے</strong>۔ صرف IMEI اور چوری کی تفصیل محفوظ رہے گی۔ آپ کی ذاتی معلومات کسی تیسرے فریق کو نہیں دی جائیں گی۔</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>3. کیا رپورٹ کے بعد لوکیشن ملے گی؟</h3>
+                    <p>جی ہاں! رپورٹ جمع کرنے کے بعد، اگر آپ کے موبائل میں تھیفٹ ہنٹر انسٹال ہو یا کوئی اور صارف اسے استعمال کر رہا ہو تو ایپ خود بخود لوکیشن بھیجے گی۔ آپ کو ایپ اور SMS کے ذریعے اطلاع ملے گی۔</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>4. کیا رپورٹ کے لیے پیسے لگتے ہیں؟</h3>
+                    <p>بالکل نہیں! تھیفٹ ہنٹر پر رپورٹ جمع کرنا <strong>100% مفت</strong> ہے۔ کوئی hidden charges نہیں، کوئی registration fee نہیں۔</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>5. کیا FIR کے بغیر رپورٹ ہو سکتی ہے؟</h3>
+                    <p>نہیں، FIR ضروری ہے۔ لیکن اگر آپ کے پاس FIR نہیں ہے تو ہماری ایپ سے <strong>FIR گائیڈ</strong> دیکھ کر آپ خود FIR کٹوا سکتے ہیں۔ قریبی تھانے جائیں یا <strong>15</strong> پر کال کریں۔</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>6. کیا میری رپورٹ محفوظ ہے؟</h3>
+                    <p>بالکل! آپ کی تمام معلومات <strong>انکرپٹڈ (Encrypted)</strong> محفوظ رہتی ہیں۔ صرف آپ کے Gmail اکاؤنٹ سے لاگ ان کر کے دیکھی سکتی ہیں۔ ہم آپ کی معلومات کسی تیسرے فریق کے ساتھ شیئر نہیں کرتے۔</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>7. رپورٹ کے بعد کیا کرنا ہے؟</h3>
+                    <p>رپورٹ جمع کرنے کے بعد، آپ کی رپورٹ ہماری ٹیم اور کمیونٹی تک پہنچ جاتی ہے۔ آپ کو <strong>SMS کے ذریعے تصدیق</strong> ملے گی۔ پھر جب بھی موبائل کی لوکیشن ملے گی، آپ کو اطلاع دی جائے گی۔</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>8. کیا موبائل واپس مل سکتا ہے؟</h3>
+                    <p>جی ہاں! ہماری کمیونٹی کے ذریعے بہت سے موبائل واپس ملے ہیں۔ لیکن یاد رکھیں، <strong>FIR لازمی ہے</strong> اور پولیس کے ذریعے کارروائی کرنی ہوگی۔ ہماری ایپ صرف لوکیشن اور ثبوت مہیا کرتی ہے۔</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== ہنگامی نمبر ====== -->
+    <section style="background: #F8F9FA;">
         <div class="container">
             <h2>📞 ہنگامی نمبر</h2>
             <p>فوری مدد کے لیے ان نمبروں پر رابطہ کریں</p>
@@ -282,32 +498,40 @@
                     <div class="feature-icon">🚔</div>
                     <h3>پولیس</h3>
                     <p style="font-size: 1.5rem; color: #E74C3C; font-weight: bold;">15</p>
+                    <p>پاکستان پولیس ہیلپ لائن</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🚨</div>
                     <h3>ریسکیو</h3>
                     <p style="font-size: 1.5rem; color: #E74C3C; font-weight: bold;">1122</p>
+                    <p>ریسکیو 1122 ہیلپ لائن</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📞</div>
-                    <h3>ہماری ہیلپ لائن</h3>
-                    <p style="font-size: 1.2rem; color: #27AE60; font-weight: bold;">+92-300-1234567</p>
+                    <h3>PTA</h3>
+                    <p style="font-size: 1.5rem; color: #E74C3C; font-weight: bold;">0800-55055</p>
+                    <p>IMEI بلاک کرنے کے لیے</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="download-section">
+    <!-- ====== قانونی نوٹس ====== -->
+    <section>
         <div class="container">
-            <h2>📲 ابھی ڈاؤن لوڈ کریں</h2>
-            <p>تھیفٹ ہنٹر کے ساتھ اپنے موبائل کو محفوظ بنائیں</p>
-            <div class="download-buttons">
-                <a href="#" class="btn btn-download">📱 APK ڈاؤن لوڈ کریں</a>
-                <a href="#" class="btn btn-download btn-google">🏪 پلے اسٹور سے حاصل کریں</a>
+            <div class="legal-notice">
+                <strong>⚖️ قانونی نوٹس:</strong>
+                <p>یہ ایپ صرف آپ کے اپنے موبائلز کی رپورٹ کے لیے ہے۔</p>
+                <p>جھوٹی رپورٹ دینا غیر قانونی ہے اور اس پر قانونی کارروائی ہو سکتی ہے۔</p>
+                <p>چوری شدہ موبائل کے لیے FIR لازمی ہے (پاکستان کے قانون کے مطابق)۔</p>
+                <p>FIR کے بغیر رپورٹ قبول نہیں کی جائے گی۔</p>
             </div>
         </div>
     </section>
 
+    </main>
+
+    <!-- ====== فوٹر ====== -->
     <footer>
         <div class="container">
             <div class="footer-grid">
@@ -316,30 +540,4 @@
                     <p>AI پاورڈ اینٹی تھیفٹ ایپ</p>
                 </div>
                 <div>
-                    <h4>📌 لنک</h4>
-                    <ul>
-                        <li><a href="index.html">ہوم</a></li>
-                        <li><a href="features.html">فیچرز</a></li>
-                        <li><a href="devices.html">میرے موبائلز</a></li>
-                        <li><a href="track.html">ٹریکنگ</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>⚖️ قانونی</h4>
-                    <ul>
-                        <li><a href="privacy.html">پرائیویسی پالیسی</a></li>
-                        <li><a href="terms.html">شرائط و ضوابط</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>📞 رابطہ</h4>
-                    <p>+92-300-1234567</p>
-                    <p>info@thefthunter.com</p>
-                </div>
-            </div>
-            <p class="copyright">&copy; 2026 تھیفٹ ہنٹر - جملہ حقوق محفوظ ہیں</p>
-        </div>
-    </footer>
-
-</body>
-                              </html>
+          
