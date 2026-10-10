@@ -289,7 +289,7 @@ section > .container > p {
 }
 
 .device-card p {
-    color: var(--gray);
+    color: #495057; /* نیا رنگ - پہلے var(--gray) تھا */
     font-size: 0.9rem;
     margin-bottom: 10px;
 }
@@ -319,8 +319,9 @@ section > .container > p {
 }
 
 .location {
-    color: var(--success);
+    color: #155724; /* نیا رنگ - پہلے var(--success) تھا */
     font-size: 0.85rem;
+    font-weight: 600;
 }
 
 /* ==============================================
@@ -587,4 +588,4 @@ footer {
     section h2 {
         font-size: 1.4rem;
     }
-                               }
+   }
