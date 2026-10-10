@@ -4,118 +4,102 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>📍 لائیو ٹریکنگ - تھیفٹ ہنٹر</title>
-    <meta name="description" content="تھیفٹ ہنٹر - اپنے موبائلز کی لائیو لوکیشن دیکھیں" />
+    <meta name="description" content="تھیفٹ ہنٹر - اپنے موبائل کی حقیقی لوکیشن Google Maps پر دیکھیں" />
     <link rel="stylesheet" href="css/style.css" />
+    
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    
     <style>
         .map-container {
             width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, #E8EAF6, #C5CAE9);
+            height: 500px;
             border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            margin-bottom: 30px;
-            position: relative;
             overflow: hidden;
-            border: 2px solid #1A237E;
+            margin: 20px 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
-        .map-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                linear-gradient(rgba(26,35,126,0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(26,35,126,0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
-        .map-pin {
-            font-size: 4rem;
-            animation: bounce 2s ease-in-out infinite;
-            z-index: 1;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        .map-text {
-            margin-top: 20px;
-            color: #1A237E;
-            font-weight: bold;
-            font-size: 1.2rem;
-            z-index: 1;
-        }
-        .live-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #E74C3C;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            z-index: 2;
-        }
-        .live-dot {
-            width: 10px;
-            height: 10px;
+        .tracking-info {
             background: white;
-            border-radius: 50%;
-            animation: blink 1s infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-        .track-card {
-            background: white;
-            padding: 20px;
+            padding: 24px;
             border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             border-right: 5px solid #27AE60;
-            display: flex;
-            align-items: center;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 16px;
-            flex-wrap: wrap;
+            margin-top: 16px;
         }
-        .track-card .icon {
-            font-size: 2.5rem;
+        .info-item {
+            background: #F8F9FA;
+            padding: 16px;
+            border-radius: 10px;
         }
-        .track-card .info {
-            flex: 1;
-            min-width: 200px;
-        }
-        .track-card .info h4 {
+        .info-item strong {
             color: #1A237E;
-            margin-bottom: 4px;
-        }
-        .track-card .info p {
-            color: #6C757D;
+            display: block;
+            margin-bottom: 6px;
             font-size: 0.9rem;
-            margin: 2px 0;
         }
-        .track-card .actions {
-            display: flex;
-            gap: 8px;
+        .info-item span {
+            color: #212529;
+            font-weight: 600;
+            font-size: 1rem;
         }
-        .btn-live {
-            background: #E74C3C;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            border: none;
-            cursor: pointer;
+        .faq-section {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+        .faq-item {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-right: 4px solid #1A237E;
+        }
+        .faq-item h3 {
+            color: #1A237E;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .faq-item p {
+            color: #495057;
+            line-height: 1.9;
+            font-size: 0.95rem;
+        }
+        .legal-notice {
+            background: linear-gradient(135deg, #FFF3CD, #FFE082);
+            border-right: 5px solid #F39C12;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        .legal-notice strong {
+            color: #856404;
+        }
+        .legal-notice p {
+            color: #856404;
+            margin: 8px 0;
+            font-size: 0.95rem;
+        }
+        .demo-notice {
+            background: #E3F2FD;
+            border-right: 5px solid #2196F3;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .demo-notice p {
+            color: #0D47A1;
+            font-size: 0.95rem;
+        }
+        @media (max-width: 768px) {
+            .map-container {
+                height: 350px;
+            }
         }
     </style>
 </head>
@@ -124,10 +108,10 @@
     <!-- ====== نیویگیشن بار ====== -->
     <nav class="navbar">
         <div class="container">
-            <a href="index.html" class="logo">
+            <div class="logo">
                 <span class="logo-icon">🎯</span>
                 <span class="logo-text">تھیفٹ ہنٹر</span>
-            </a>
+            </div>
             <ul class="nav-menu">
                 <li><a href="index.html">ہوم</a></li>
                 <li><a href="features.html">فیچرز</a></li>
@@ -141,131 +125,137 @@
         </div>
     </nav>
 
+    <!-- ====== Main ====== -->
+    <main>
+
     <!-- ====== ہیرو ====== -->
     <section class="hero">
         <div class="container">
-            <h1>📍 <span>لائیو</span> ٹریکنگ</h1>
-            <p>اپنے تمام موبائلز کی لائیو لوکیشن ایک نقشے پر دیکھیں</p>
+            <h1>📍 <span>حقیقی</span> لائیو ٹریکنگ</h1>
+            <p>اپنے چوری شدہ موبائل کی اصل لوکیشن Google Maps پر دیکھیں</p>
         </div>
     </section>
 
-    <!-- ====== نقشہ ====== -->
+    <!-- ====== ٹریکنگ ====== -->
     <section>
         <div class="container">
-            <h2>🗺️ لائیو نقشہ</h2>
-            <p>تمام موبائلز کی موجودہ پوزیشن</p>
+            <h2>🗺️ حقیقی ٹائم لوکیشن</h2>
+            <p>یہ نقشہ آپ کے موبائل کی اصل لوکیشن دکھاتا ہے - جیسا کہ Google Maps پر نظر آتی ہے</p>
 
-            <div class="map-container">
-                <div class="live-badge">
-                    <span class="live-dot"></span>
-                    LIVE
+            <!-- Demo Notice -->
+            <div class="demo-notice">
+                <p>ℹ️ <strong>نوٹ:</strong> یہ ایک ڈیمو نقشہ ہے۔ حقیقی لوکیشن کے لیے ایپ ڈاؤن لوڈ کریں اور اپنے موبائل کو رجسٹر کریں۔</p>
+            </div>
+
+            <!-- حقیقی Google Map -->
+            <div id="map" class="map-container"></div>
+
+            <!-- ٹریکنگ کی معلومات -->
+            <div class="tracking-info">
+                <h3 style="color: #1A237E; margin-bottom: 10px;">📊 موجودہ حالت</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>📍 موجودہ لوکیشن</strong>
+                        <span id="current-location">ڈیمو: کراچی</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>⏰ آخری اپڈیٹ</strong>
+                        <span id="last-update">ابھی</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>🔋 بیٹری</strong>
+                        <span id="battery">85%</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>📶 نیٹ ورک</strong>
+                        <span id="network">Jazz 4G</span>
+                    </div>
                 </div>
-                <div class="map-pin">📍</div>
-                <div class="map-text">5 موبائلز ٹریک ہو رہے ہیں</div>
+            </div>
+
+            <!-- قانونی نوٹس -->
+            <div class="legal-notice">
+                <strong>⚖️ قانونی نوٹس:</strong>
+                <p>یہ ایپ صرف آپ کے اپنے موبائلز کی لوکیشن دکھاتی ہے۔</p>
+                <p>کسی اور کے موبائل کی بغیر اجازت ٹریکنگ غیر قانونی ہے۔</p>
+                <p>چوری شدہ موبائل کے لیے FIR لازمی ہے (پاکستان کے قانون کے مطابق)۔</p>
             </div>
         </div>
     </section>
 
-    <!-- ====== لائیو ٹریکنگ لسٹ ====== -->
-    <section style="background: white;">
+    <!-- ====== FAQ ====== -->
+    <section style="background: #F8F9FA;">
         <div class="container">
-            <h2>📱 تمام موبائلز کی لوکیشن</h2>
-            <p>ہر موبائل کی موجودہ لوکیشن اور حالت</p>
+            <h2>❓ عام سوالات</h2>
+            <p>لائیو ٹریکنگ کے بارے میں اکثر پوچھے جانے والے سوالات</p>
 
-            <!-- ڈیوائس 1 -->
-            <div class="track-card">
-                <div class="icon">📱</div>
-                <div class="info">
-                    <h4>ساجد کا موبائل</h4>
-                    <p>Samsung Galaxy S24</p>
-                    <p>📍 کراچی، پاکستان - 24.8607° N, 67.0011° E</p>
-                    <p>⏰ 2 منٹ پہلے | 🔋 85%</p>
+            <div class="faq-section">
+
+                <div class="faq-item">
+                    <h3>1. کیا یہ ٹریکنگ حقیقی ہے؟</h3>
+                    <p>جی ہاں! جب آپ ایپ ڈاؤن لوڈ کر کے اپنے موبائل کو رجسٹر کریں گے، تو یہ Google Maps کے ذریعے آپ کے موبائل کی <strong>حقیقی لوکیشن</strong> دکھائے گی۔ جیسا کہ آپ کوئی چیز Google Maps پر ڈھونڈتے ہیں، بالکل ویسے ہی۔</p>
                 </div>
-                <div class="actions">
-                    <a href="#" class="btn-live">📍 لائیو دیکھیں</a>
+
+                <div class="faq-item">
+                    <h3>2. کیا ایپ انٹرنیٹ کے بغیر کام کرتی ہے؟</h3>
+                    <p>جی ہاں! اگر آپ کا موبائل انٹرنیٹ سے منقطع ہو جائے تو بھی یہ <strong>SMS کے ذریعے لوکیشن</strong> بھیجتا رہے گا۔ جب انٹرنیٹ واپس آئے گا تو تمام لوکیشنز خود بخود اپڈیٹ ہو جائیں گی۔</p>
                 </div>
+
+                <div class="faq-item">
+                    <h3>3. کیا موبائل چوری ہونے پر لوکیشن ملے گی؟</h3>
+                    <p>جی ہاں! اگر آپ کا موبائل چوری ہو جائے اور اس میں تھیفٹ ہنٹر انسٹال ہو، تو ایپ <strong>ہر 30 سیکنڈ بعد</strong> لوکیشن بھیجے گی۔ آپ کو SMS اور ایپ کے ذریعے حقیقی لوکیشن ملے گی۔</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>4. کیا 5 موبائل ایک ساتھ ٹریک ہو سکتے ہیں؟</h3>
+                    <p>جی ہاں! آپ ایک ہی Gmail اکاؤنٹ سے <strong>5-10 موبائل</strong> رجسٹر کر سکتے ہیں۔ ہر موبائل کی لوکیشن، بیٹری، اور حالت ایک ہی صفحے پر دکھے گی۔</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>5. کیا یہ قانونی ہے؟</h3>
+                    <p>جی ہاں، بالکل قانونی ہے! یہ ایپ <strong>صرف آپ کے اپنے موبائلز</strong> کے لیے ہے۔ جیسے آپ اپنے گھر کے 5 موبائلز کی لوکیشن دیکھ سکتے ہیں۔ کسی اور کی بغیر اجازت ٹریکنگ کرنا غیر قانونی ہے اور اس ایپ میں ایسا کوئی فیچر نہیں ہے۔</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>6. چوری شدہ موبائل کے لیے FIR ضروری ہے؟</h3>
+                    <p>پاکستان کے قانون کے مطابق، چوری شدہ موبائل کی <strong>سرکاری رپورٹ (FIR)</strong> ضروری ہے۔ ایپ آپ کو لوکیشن دکھا سکتی ہے، لیکن پولیس کے ذریعے موبائل واپس لینے کے لیے FIR لازمی ہے۔ ہماری ایپ میں FIR رجسٹر کرنے کا آپشن موجود ہے۔</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>7. کیا ایپ میری پرائیویسی محفوظ رکھتی ہے؟</h3>
+                    <p>بالکل! تمام ڈیٹا آپ کے موبائل پر <strong>انکرپٹڈ (Encrypted)</strong> محفوظ رہتا ہے۔ ہم آپ کی لوکیشن کسی تیسرے فریق کے ساتھ شیئر نہیں کرتے۔ صرف آپ کے اپنے Gmail اکاؤنٹ سے لاگ ان کر کے دیکھ سکتے ہیں۔</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>8. لوکیشن کتنی درست (Accurate) ہوتی ہے؟</h3>
+                    <p>یہ <strong>GPS + WiFi + سیل ٹاور</strong> تینوں کا استعمال کرتی ہے۔ عام طور پر درستگی <strong>5-10 میٹر</strong> تک ہوتی ہے۔ اگر موبائل کھلی جگہ پر ہو تو 3-5 میٹر تک بھی درست ہو سکتی ہے۔</p>
+                </div>
+
             </div>
-
-            <!-- ڈیوائس 2 -->
-            <div class="track-card">
-                <div class="icon">📱</div>
-                <div class="info">
-                    <h4>بیوی کا موبائل</h4>
-                    <p>iPhone 15 Pro</p>
-                    <p>📍 لاہور، پاکستان - 31.5204° N, 74.3587° E</p>
-                    <p>⏰ 5 منٹ پہلے | 🔋 62%</p>
-                </div>
-                <div class="actions">
-                    <a href="#" class="btn-live">📍 لائیو دیکھیں</a>
-                </div>
-            </div>
-
-            <!-- ڈیوائس 3 -->
-            <div class="track-card">
-                <div class="icon">📱</div>
-                <div class="info">
-                    <h4>بیٹے کا موبائل</h4>
-                    <p>OnePlus 12</p>
-                    <p>📍 اسلام آباد - 33.6844° N, 73.0479° E</p>
-                    <p>⏰ 2 گھنٹے پہلے | 🔋 23% | ⚠️ آف لائن</p>
-                </div>
-                <div class="actions">
-                    <a href="#" class="btn-live">📍 آخری لوکیشن</a>
-                </div>
-            </div>
-
-            <!-- ڈیوائس 4 -->
-            <div class="track-card">
-                <div class="icon">📱</div>
-                <div class="info">
-                    <h4>بیٹی کا موبائل</h4>
-                    <p>Google Pixel 8</p>
-                    <p>📍 راولپنڈی - 33.5651° N, 73.0169° E</p>
-                    <p>⏰ 1 منٹ پہلے | 🔋 92%</p>
-                </div>
-                <div class="actions">
-                    <a href="#" class="btn-live">📍 لائیو دیکھیں</a>
-                </div>
-            </div>
-
-            <!-- ڈیوائس 5 -->
-            <div class="track-card">
-                <div class="icon">📱</div>
-                <div class="info">
-                    <h4>گھر کا موبائل</h4>
-                    <p>Xiaomi 14</p>
-                    <p>📍 گھر - 24.8607° N, 67.0011° E</p>
-                    <p>⏰ 3 منٹ پہلے | 🔋 78%</p>
-                </div>
-                <div class="actions">
-                    <a href="#" class="btn-live">📍 لائیو دیکھیں</a>
-                </div>
-            </div>
-
         </div>
     </section>
 
-    <!-- ====== لوکیشن کیسے کام کرتی ہے ====== -->
+    <!-- ====== کیسے استعمال کریں ====== -->
     <section>
         <div class="container">
-            <h2>⚙️ لوکیشن کیسے کام کرتی ہے؟</h2>
-            <p>تھیفٹ ہنٹر 3 مختلف طریقوں سے لوکیشن حاصل کرتا ہے</p>
+            <h2>📱 لائیو ٹریکنگ کیسے استعمال کریں؟</h2>
+            <p>3 آسان مراحل میں اپنے موبائل کی لوکیشن دیکھیں</p>
 
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🛰️</div>
-                    <h3>GPS</h3>
-                    <p>سب سے درست لوکیشن، 5-10 میٹر تک</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>📥 ایپ ڈاؤن لوڈ کریں</h3>
+                    <p>تھیفٹ ہنٹر ایپ ڈاؤن لوڈ کر کے اپنے موبائل میں انسٹال کریں</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📶</div>
-                    <h3>WiFi</h3>
-                    <p>قریبی WiFi نیٹ ورکس سے لوکیشن</p>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>🔐 Gmail سے لاگ ان کریں</h3>
+                    <p>اپنے Gmail اکاؤنٹ سے لاگ ان کریں اور موبائل رجسٹر کریں</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📡</div>
-                    <h3>سیل ٹاور</h3>
-                    <p>انٹرنیٹ بند ہونے پر بھی لوکیشن</p>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>📍 لوکیشن دیکھیں</h3>
+                    <p>حقیقی وقت میں موبائل کی لوکیشن Google Maps پر دیکھیں</p>
                 </div>
             </div>
         </div>
@@ -275,13 +265,15 @@
     <section class="download-section">
         <div class="container">
             <h2>📲 ابھی ڈاؤن لوڈ کریں</h2>
-            <p>لائیو ٹریکنگ کے ساتھ اپنے موبائلز کی نگرانی کریں</p>
+            <p>اپنے موبائل کی حقیقی لوکیشن ٹریک کرنے کے لیے ایپ ڈاؤن لوڈ کریں</p>
             <div class="download-buttons">
-                <a href="#" class="btn btn-download">📱 APK ڈاؤن لوڈ کریں</a>
+                <a href="download.html" class="btn btn-download">📱 APK ڈاؤن لوڈ کریں</a>
                 <a href="#" class="btn btn-download btn-google">🏪 پلے اسٹور سے حاصل کریں</a>
             </div>
         </div>
     </section>
+
+    </main>
 
     <!-- ====== فوٹر ====== -->
     <footer>
@@ -317,5 +309,78 @@
         </div>
     </footer>
 
+    <!-- ====== Google Maps Script ====== -->
+    <script>
+        function initMap() {
+            // Default location (Karachi)
+            const defaultLocation = { lat: 24.8607, lng: 67.0011 };
+            
+            // Create map
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 13,
+                center: defaultLocation,
+                mapTypeControl: true,
+                streetViewControl: true,
+                fullscreenControl: true,
+                styles: [
+                    {
+                        featureType: "all",
+                        elementType: "geometry",
+                        stylers: [{ color: "#e8eaf6" }]
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "geometry",
+                        stylers: [{ color: "#1A237E" }]
+                    },
+                    {
+                        featureType: "road",
+                        elementType: "geometry",
+                        stylers: [{ color: "#ffffff" }]
+                    }
+                ]
+            });
+            
+            // Add marker
+            const marker = new google.maps.Marker({
+                position: defaultLocation,
+                map: map,
+                title: "آپ کا موبائل یہاں ہے",
+                animation: google.maps.Animation.DROP,
+                icon: {
+                    url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(
+                        '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#E74C3C"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>'
+                    ),
+                    scaledSize: new google.maps.Size(40, 40)
+                }
+            });
+            
+            // Add info window
+            const infoWindow = new google.maps.InfoWindow({
+                content: '<div style="font-family: sans-serif; padding: 8px;"><strong style="color: #1A237E;">🎯 تھیفٹ ہنٹر</strong><br><span style="color: #27AE60;">🟢 آن لائن</span><br><small>آخری اپڈیٹ: ابھی</small></div>'
+            });
+            
+            marker.addListener("click", () => {
+                infoWindow.open(map, marker);
+            });
+            
+            // Auto-open info window
+            infoWindow.open(map, marker);
+        }
+        
+        // Update time
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('ur-PK');
+            const lastUpdateEl = document.getElementById('last-update');
+            if (lastUpdateEl) {
+                lastUpdateEl.textContent = timeStr;
+            }
+        }
+        
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+
 </body>
-  </html>
+                                                        </html>
